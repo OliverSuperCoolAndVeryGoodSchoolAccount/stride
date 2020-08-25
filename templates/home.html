@@ -2,6 +2,41 @@
 
 {% block pageheading %}welcome{% endblock %}
 
+{% block body %}
+            <div class = "mainPageParent">
+                <div class="postInput">
+                {% if logged_in %}
+                    <form method="POST">
+                        <label for="message">What's on your mind, {{ session.firstname }}?</label><br><br>
+                        <textarea name="message" id="message" rows="10" cols="40"> </textarea><br>
+                        {{ recaptcha }}
+                        <input type="submit" value = "Send it in stride!">
+                    </form>
+                {% else %}
+                    <strong><em>Hello! Welcome to Stride!<br><br><br><br><br><br> Pay me @paypal >>> tohsgum@gmail.com </em></strong>
+                {% endif %}
+                 </div>
+                <div class="mainFeed">
+                {% for post in posts %}
+                    <div class="mainFeed-box">
+                        <div class="post-box-heading">
+                            <h3> {{ post[1] }} {{ post[2] }}</h3>
+                        </div>
+                        <div class="mainFeed-box-text">
+                            <p>{{ post[3] }} </p>
+                        </div>
+                        <div class="mainFeed-box-info">
+                            {{ post[4] }}
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+
+
+{% endblock %}
+
 {% block main %}
-<strong><em>hello world</em></strong>
+
 {% endblock %}

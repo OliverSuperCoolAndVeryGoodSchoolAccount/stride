@@ -17,13 +17,13 @@ cart
     </thead>
     <tbody>
     {% set ns=namespace(total = 0) %}
-    {% for item in cart_items %}
+    {% for item in cart_data %}
     <tr>
         <td>{{ item[2] }}</td>
         <td>{{ item[1] }}</td>
         <td>${{ "{:.2f}".format(item[3]) }}</td>
         <td>${{ "{:.2f}".format(item[3] * item[1]) }}</td>
-        <td><a href="/removeonefromcart/{{ item[0] }}"</td>
+        <td><a href="/removeonefromcart/{{ item[0] }}">X</a></td>
         {% set ns.total = ns.total + item[3] * item[1] %}
     </tr>
     {% endfor %}

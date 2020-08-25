@@ -6,7 +6,141 @@
 }
 
 body {
-    background-color: rgba(236, 240, 241, 1.0);
+    background-color: black;
+    color: rgba(255, 255, 255, 1);
+}
+
+
+.saturate {
+    filter: saturate(2.8);
+}
+
+.rainbow {
+
+    /* Font options */
+    font-family: cursive;
+    text-shadow: 2px 2px 4px #ffffff;
+    font-size: 40px;
+
+    /* Chrome, Safari, Opera */
+    -webkit-animation: rainbow 30s infinite;
+
+    /* Internet Explorer */
+    -ms-animation: rainbow 30s infinite;
+
+    /* Standar Syntax */
+    animation: rainbow 30s infinite;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes rainbow {
+    0% {
+        color: orange;
+    }
+    10% {
+        color: purple;
+    }
+    20% {
+        color: red;
+    }
+    30% {
+        color: CadetBlue;
+    }
+    40% {
+        color: yellow;
+    }
+    50% {
+        color: coral;
+    }
+    60% {
+        color: green;
+    }
+    70% {
+        color: cyan;
+    }
+    80% {
+        color: DeepPink;
+    }
+    90% {
+        color: DodgerBlue;
+    }
+    100% {
+        color: orange;
+    }
+}
+
+/* Internet Explorer */
+@-ms-keyframes rainbow {
+    0% {
+        color: orange;
+    }
+    10% {
+        color: purple;
+    }
+    20% {
+        color: red;
+    }
+    30% {
+        color: CadetBlue;
+    }
+    40% {
+        color: yellow;
+    }
+    50% {
+        color: coral;
+    }
+    60% {
+        color: green;
+    }
+    70% {
+        color: cyan;
+    }
+    80% {
+        color: DeepPink;
+    }
+    90% {
+        color: DodgerBlue;
+    }
+    100% {
+        color: orange;
+    }
+}
+
+/* Standar Syntax */
+@keyframes rainbow {
+    0% {
+        color: orange;
+    }
+    10% {
+        color: purple;
+    }
+    20% {
+        color: red;
+    }
+    30% {
+        color: CadetBlue;
+    }
+    40% {
+        color: yellow;
+    }
+    50% {
+        color: coral;
+    }
+    60% {
+        color: green;
+    }
+    70% {
+        color: cyan;
+    }
+    80% {
+        color: DeepPink;
+    }
+    90% {
+        color: DodgerBlue;
+    }
+    100% {
+        color: orange;
+    }
 }
 
 .container {
@@ -40,14 +174,24 @@ h2 {
 }
 
 nav {
-    background-color: rgba(44, 62, 80, 1.0); /* darkest blue */
+    background-color: rgb(23, 99, 0); /* darkest blue */
     text-align: center;
     /*color: rgba(52, 152, 219, 1.0);!*light blue*!*/
     font-size: 1.5rem;
     padding-top: 0.4rem;
     padding-bottom: 0.7rem;
-    color: rgba(52, 152, 219, 1.0); /*light blue*/
+    color: rgba(69, 219, 52, 0.73); /*light blue*/
 }
+.mainPageParent{
+    width: 100%;
+}
+
+.postInput{
+    width: 49%;
+    float:left;
+}
+
+
 
 .navbar-brand {
     display: inline;
@@ -71,11 +215,11 @@ nav a {
 nav a:hover {
     /*color: rgba(44, 62, 80, 1.0); !* darkest blue *!*/
     /*background-color: rgba(52, 152, 219, 1.0); !*light blue*!*/
-    border-bottom: 3px solid rgba(52, 152, 219, 1.0);
+    border-bottom: 3px solid rgb(122, 219, 52);
 }
 
 a, a:visited {
-    color: rgba(52, 152, 219, 1.0);
+    color: rgb(58, 219, 52);
     /*color:hotpink;*/
     text-decoration: none;
 }
@@ -84,25 +228,28 @@ a, a:visited {
     /*max-width:200px;*/
 }
 
-.products {
+.mainFeed {
     display: flex;
+    word-wrap: break-word;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    width: 50%;
+    float: right;
 }
 
-.product-box {
+.mainFeed-box {
     /*width: 13vw;*/
-    width: 32%;
-    /*float: left;*/
+    width: 90%;
+    float: right;
     /*display: table-cell;*/
-    /*padding: 0.5rem;*/
-    /*margin: 1vw;*/
+    padding: 0.5rem;
+    margin: 1vw;
     border: 1px solid rgba(189, 195, 199, 1.0);
-    color: rgba(44, 62, 80, 1.0);
+    color: rgb(255, 255, 255);
     margin-bottom: 0.5rem;
 }
 
-.product-box-heading {
+.mainFeed-box-heading {
     padding: 0.5rem;
 }
 
@@ -111,22 +258,23 @@ a, a:visited {
     overflow: hidden;
 }
 
-.product-box-info {
+.mainFeed-box-info {
     padding: 0.5rem;
+    float: right;
 
 }
 
-.product-box h3 {
+.mainFeed-box h3 {
     font-size: 1.2rem;
     text-align: center;
 }
 
-.product-box p {
-    font-size: 0.8rem;
+.mainFeed-box p {
+    font-size: 1rem;
     margin-bottom: 0.3rem;
 }
 
-.product-box a {
+.mainFeed-box a {
     border: 1px solid tomato;
     padding: 0.3rem;
     text-align: right;

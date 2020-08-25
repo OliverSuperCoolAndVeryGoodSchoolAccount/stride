@@ -1,13 +1,26 @@
-from flask import Flask, render_template, request, session, redirect
 import sqlite3
+from datetime import datetime
 from sqlite3 import Error
-from flask_bcrypt import Bcrypt
 
-DB_NAME = "smile.db"
+from flask import Flask, render_template, request, session, redirect, flash
+from flask_bcrypt import Bcrypt
+from flask_recaptcha import ReCaptcha
+
+DB_NAME = "C:\\Users\\16107\\OneDrive - Wellington College\\stride\\stride\\stride.db"
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 app.secret_key = "a"
+
+app.config.update(dict(
+    RECAPTCHA_ENABLED=True,
+    RECAPTCHA_SITE_KEY="6LdhesIZAAAAALIKktWfQmkzm75jMVRTkEO0RAuP",
+    RECAPTCHA_SECRET_KEY="6LdhesIZAAAAANy7GTtv0LeIKrCJI5fKMmRTNh-m",
+    RECAPTCHA_THEME="dark",
+))
+
+recaptcha = ReCaptcha()
+recaptcha.init_app(app)
 
 
 def create_connection(db_file):
@@ -21,39 +34,53 @@ def create_connection(db_file):
     return None
 
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def render_homepage():
-    return render_template('home.html', logged_in=is_logged_in())
+    if not is_logged_in():
+        return redirect('/login')
+    if request.method == "POST":
+        if recaptcha.verify():
+            userid = session['userid']
+            post = request.form['message'].strip()
+            if not 1 <= len(post) <= 280:
+                flash("Error: Invalid input in text box")
+                return redirect('/')
+            time = datetime.now()
+            query = "INSERT INTO posts(id,post,time,customer_id) VALUES (NULL,?,?,?)"
+            con = create_connection(DB_NAME)
+            cur = con.cursor()
+            cur.execute(query, (post, time, userid))
+            con.commit()
+            con.close()
+            return redirect('/')
+            pass
+        else:
+            flash("Captcha failed, please try again.")
+            return redirect('/')
 
-
-@app.route('/menu')
-def render_menu_page():
-    # connect to the database
     con = create_connection(DB_NAME)
 
     # SELECT the things you want from your table(s)
-    query = "SELECT name, description, volume, price, image, id " \
-            "FROM product"
+    query = """SELECT posts.id,customer.fname,customer.lname,posts.post,strftime('%d/%m/%Y %H:%M', posts.time) AS time 
+            FROM posts,customer
+            WHERE posts.customer_id = customer.id
+            ORDER BY time DESC"""
+            #Add limit?
 
     cur = con.cursor()  # You need this line next
     cur.execute(query)  # this line actually executes the query
-    product_list = cur.fetchall()  # puts the results into a list usable in python
+    post_list = cur.fetchall()  # puts the results into a list usable in python
     con.close()
-
-    return render_template('menu.html', products=product_list, logged_in=is_logged_in())
-
-
-@app.route('/addtocart/<productid>')
-def addtocart(productid):
+    return render_template('home.html', logged_in=is_logged_in(), posts=post_list,)
 
 
-    return redirect(request.referrer)
-
-
-@app.route('/cart')
-def render_cart():
-
-    return render_template('cart.html', cart_items=cart_items, logged_in=is_logged_in())
+@app.route('/profile')
+def render_profile():
+    if is_logged_in():
+        return render_template('profile.html', logged_in=is_logged_in())
+    else:
+        flash("Error: user not logged in")
+        return redirect("/")
 
 
 @app.route('/contact')
@@ -93,7 +120,6 @@ def render_login_page():
         session['email'] = email
         session['userid'] = userid
         session['firstname'] = firstname
-        session['cart'] = []
         print(session)
         return redirect('/')
 
@@ -114,9 +140,11 @@ def render_signup_page():
         password2 = request.form.get('password2')
 
         if password != password2:
+            flash('Passwords dont match')
             return redirect('/signup?error=Passwords+dont+match')
 
         if len(password) < 8:
+            flash('Password must be 8 characters or longer')
             return redirect('/signup?error=Password+must+be+8+characters+or+more')
 
         hashed_password = bcrypt.generate_password_hash(password)
@@ -130,6 +158,7 @@ def render_signup_page():
         try:
             cur.execute(query, (fname, lname, email, hashed_password))  # this line actually executes the query
         except sqlite3.IntegrityError:
+            flash('Email is already used')
             return redirect('/signup?error=Email+is+already+used')
 
         con.commit()
@@ -144,7 +173,8 @@ def logout():
     print(list(session.keys()))
     [session.pop(key) for key in list(session.keys())]
     print(list(session.keys()))
-    return redirect(request.referrer + '?message=See+you+next+time!')
+    flash("See you next time!")
+    return redirect(request.referrer)
 
 
 def is_logged_in():

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2b9fba6a-1412-4004-97d2-b2f59325a3d7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smile.db" beforeDir="false" afterPath="$PROJECT_DIR$/smile.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/smile.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/smile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1dNowo2lcaRUny5bG4kk22Om7qK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\16107\OneDrive - Wellington College\smile\smile\templates" />
+      <recent name="C:\Users\16107\OneDrive - Wellington College\smile\smile" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="smile" type="PythonConfigurationType" factoryName="Python">
+      <module name="smile" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2b9fba6a-1412-4004-97d2-b2f59325a3d7" name="Default Changelist" comment="" />
+      <created>1592275152652</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592275152652</updated>
+      <workItem from="1592275166417" duration="984000" />
+      <workItem from="1592346145725" duration="2707000" />
+      <workItem from="1592437286689" duration="2849000" />
+      <workItem from="1592790644932" duration="755000" />
+      <workItem from="1592879214006" duration="2784000" />
+      <workItem from="1592950554999" duration="2162000" />
+      <workItem from="1595903193289" duration="2748000" />
+      <workItem from="1595974720422" duration="1181000" />
+      <workItem from="1596418196983" duration="2858000" />
+      <workItem from="1596507962802" duration="2880000" />
+      <workItem from="1596532143078" duration="1414000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="179" y="271" key="#SQL_Dialects" timestamp="1592276088492">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="179" y="271" key="#SQL_Dialects/0.0.1600.860@0.0.1600.860" timestamp="1592276088492" />
+    <state x="627" y="106" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1596532432383">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="392" y="88" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1592348882855" />
+    <state x="627" y="106" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1596532432383" />
+    <state x="989" y="115" key="#smile" timestamp="1596532176132">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="989" y="115" key="#smile/0.0.2560.1040@0.0.2560.1040" timestamp="1596532176132" />
+    <state x="580" y="184" key="FileChooserDialogImpl" timestamp="1592348866716">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="580" y="184" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1592348866716" />
+    <state width="2517" height="282" key="GridCell.Tab.0.bottom" timestamp="1596534656594">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1557" height="113" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1596508920587" />
+    <state width="2517" height="282" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1596534656594" />
+    <state width="2517" height="282" key="GridCell.Tab.0.center" timestamp="1596534656594">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1557" height="113" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1596508920587" />
+    <state width="2517" height="282" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1596534656594" />
+    <state width="2517" height="282" key="GridCell.Tab.0.left" timestamp="1596534656594">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1557" height="113" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1596508920587" />
+    <state width="2517" height="282" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1596534656594" />
+    <state width="2517" height="282" key="GridCell.Tab.0.right" timestamp="1596534656594">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1557" height="113" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1596508920587" />
+    <state width="2517" height="282" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1596534656594" />
+    <state width="1557" height="275" key="GridCell.Tab.1.bottom" timestamp="1592952194099">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="275" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1592952194099" />
+    <state width="1557" height="275" key="GridCell.Tab.1.center" timestamp="1592952194099">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="275" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1592952194099" />
+    <state width="1557" height="275" key="GridCell.Tab.1.left" timestamp="1592952194099">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="275" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1592952194099" />
+    <state width="1557" height="275" key="GridCell.Tab.1.right" timestamp="1592952194099">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="275" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1592952194099" />
+    <state x="472" y="180" key="SettingsEditor" timestamp="1596532459491">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="295" y="149" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1592275925597" />
+    <state x="472" y="180" key="SettingsEditor/0.0.2560.1040@0.0.2560.1040" timestamp="1596532459491" />
+    <state x="658" y="167" width="523" height="525" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1592348680751">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="658" y="167" width="523" height="525" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1600.860@0.0.1600.860" timestamp="1592348680751" />
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1592880438600">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1592880438600" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/smile$smile.coverage" NAME="smile Coverage Results" MODIFIED="1596532939143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+  </component>
+</project>

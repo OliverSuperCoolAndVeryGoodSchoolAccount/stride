@@ -61,7 +61,7 @@ def render_homepage():
     con = create_connection(DB_NAME)
 
     # SELECT the things you want from your table(s)
-    query = """SELECT posts.id,customer.fname,customer.lname,posts.post,strftime('%d/%m/%Y %H:%M', posts.time) AS time 
+    query = """SELECT posts.id,customer.fname,customer.lname,posts.post,strftime('%d/%m/%Y %H:%M:%S', posts.time) AS time 
             FROM posts,customer
             WHERE posts.customer_id = customer.id
             ORDER BY time DESC"""

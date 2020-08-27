@@ -194,8 +194,15 @@ def user(userid):
     cur = con.cursor()  # You need this line next
     cur.execute(query, (userid,))  # this line actually executes the query
     post_list = cur.fetchall()  # puts the results into a list usable in python
+
+    con = create_connection(DB_NAME)
+    query = "SELECT fname,lname FROM customer WHERE id = ?"
+    cur = con.cursor()  # You need this line next
+    cur.execute(query, (userid,))  # this line actually executes the query
+    user_info = cur.fetchall()
+
     con.close()
-    return render_template('profile.html', logged_in=is_logged_in(), posts=post_list, )
+    return render_template('profile.html', logged_in=is_logged_in(), posts=post_list, userinfo = user_info,)
 
 
 def is_logged_in():

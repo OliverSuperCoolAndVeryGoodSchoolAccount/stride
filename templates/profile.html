@@ -1,9 +1,33 @@
 {% extends 'base.html' %}
 
 {% block pageheading %}
-Your Profile
+{{ posts[0][1] }} {{ posts[0][2] }}'s Profile
 {% endblock %}
 
-{% block main %}
-<strong class = rainbow> Im sorry, {{ session.firstname }}, but the profile page is currently under development. Please check back later.</strong>
+{% block body %}
+            <div class = "mainPageParent">
+                <div class="postInput">
+                {% if logged_in %}
+
+                {% endif %}
+                 </div>
+                <div class="mainFeed">
+                {% for post in posts %}
+                    <div class="mainFeed-box">
+                        <div class="post-box-heading">
+                            <h3> {{ post[1] }} {{ post[2] }}</h3>
+                        </div>
+                        <div class="mainFeed-box-text">
+                            <p>{{ post[3] }} </p>
+                        </div>
+                        <div class="mainFeed-box-info">
+                            {{ post[4] }}
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+
+
 {% endblock %}

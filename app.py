@@ -77,7 +77,7 @@ def render_homepage():
 @app.route('/profile')
 def render_profile():
     if is_logged_in():
-        return render_template('profile.html', logged_in=is_logged_in())
+        return redirect('/profile/' + str(session['userid']))
     else:
         flash("Error: user not logged in")
         return redirect("/")
@@ -175,6 +175,27 @@ def logout():
     print(list(session.keys()))
     flash("See you next time!")
     return redirect(request.referrer)
+
+@app.route('/profile/<userid>')
+def user(userid):
+    con = create_connection(DB_NAME)
+    query = "SELECT COUNT(*) FROM customer WHERE id = ?"
+    cur = con.cursor()  # You need this line next
+    cur.execute(query, (userid,))  # this line actually executes the query
+    profilecount = cur.fetchall()[0][0]  # puts the results into a list usable in python
+    if profilecount < 1:
+        flash("No user with " + str(userid) + " as their id.")
+        return redirect("/")
+
+    query = """SELECT posts.id,customer.fname,customer.lname,posts.post,strftime('%d/%m/%Y %H:%M:%S', posts.time) AS time
+                FROM posts,customer
+                WHERE posts.customer_id = ? AND posts.customer_id = customer.id
+                ORDER BY time DESC"""
+    cur = con.cursor()  # You need this line next
+    cur.execute(query, (userid,))  # this line actually executes the query
+    post_list = cur.fetchall()  # puts the results into a list usable in python
+    con.close()
+    return render_template('profile.html', logged_in=is_logged_in(), posts=post_list, )
 
 
 def is_logged_in():

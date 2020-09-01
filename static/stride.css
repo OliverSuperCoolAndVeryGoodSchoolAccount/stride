@@ -10,6 +10,9 @@ body {
     color: rgba(255, 255, 255, 1);
 }
 
+header h2{
+    padding: 0.5rem;
+}
 
 .saturate {
     filter: saturate(2.8);
@@ -170,7 +173,7 @@ h1 {
 h2 {
     font-size: 2rem;
     text-align: center;
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 1rem 0;
 }
 
 nav {
@@ -207,7 +210,7 @@ nav a {
     /*margin:0 0.5rem;*/
     padding: 0 0.5rem;
     font-size: 1.5rem;
-
+    color: rgb(58, 219, 52);
     /*border: 1px solid rgba(52, 152, 219, 1.0);*/
     /*border-radius:0.5rem;*/
 }
@@ -219,11 +222,20 @@ nav a:hover {
 }
 
 a, a:visited {
-    color: rgb(58, 219, 52);
     /*color:hotpink;*/
     text-decoration: none;
 }
 
+h1 a {
+    color: white;
+}
+
+
+h1 a:hover {
+    /*color: rgba(44, 62, 80, 1.0); !* darkest blue *!*/
+    /*background-color: rgba(52, 152, 219, 1.0); !*light blue*!*/
+    border-bottom: 3px solid rgb(255,255,255);
+}
 .product-box img {
     /*max-width:200px;*/
 }
@@ -257,13 +269,33 @@ a, a:visited {
     height: 150px;
     overflow: hidden;
 }
+.button-group a{
+    color:#ffffff;
+}
 
+.button-group a:hover {
+    /*color: rgba(44, 62, 80, 1.0); !* darkest blue *!*/
+    /*background-color: rgba(52, 152, 219, 1.0); !*light blue*!*/
+    border-bottom: 3px solid rgb(255,255,255);
+}
 .mainFeed-box-info {
     padding: 0.5rem;
     float: right;
 
 }
+.mainFeed-box-text {
+    padding: 0.3rem;
 
+}
+.mainFeed-box a {
+    color: white;
+}
+
+.mainFeed-box a:hover {
+    /*color: rgba(44, 62, 80, 1.0); !* darkest blue *!*/
+    /*background-color: rgba(52, 152, 219, 1.0); !*light blue*!*/
+    border-bottom: 3px solid rgb(255,255,255);
+}
 .mainFeed-box h3 {
     font-size: 1.2rem;
     text-align: center;
@@ -272,12 +304,6 @@ a, a:visited {
 .mainFeed-box p {
     font-size: 1rem;
     margin-bottom: 0.3rem;
-}
-
-.mainFeed-box a {
-    border: 1px solid tomato;
-    padding: 0.3rem;
-    text-align: right;
 }
 
 .myform {

@@ -61,9 +61,9 @@ def render_homepage():
     con = create_connection(DB_NAME)
 
     # SELECT the things you want from your table(s)
-    query = """SELECT posts.id,customer.fname,customer.lname,posts.post,strftime('%d/%m/%Y %H:%M:%S', posts.time) AS time 
-            FROM posts,customer
-            WHERE posts.customer_id = customer.id
+    query = """SELECT posts.id,users.fname,users.lname,posts.post,strftime('%d/%m/%Y %H:%M:%S', posts.time) AS time, users.id 
+            FROM posts,users
+            WHERE posts.customer_id = users.id
             ORDER BY time DESC"""
             #Add limit?
 
@@ -97,7 +97,7 @@ def render_login_page():
         email = request.form['email'].strip().lower()
         password = request.form['password'].strip()
 
-        query = """SELECT id, fname, password FROM customer WHERE email = ?"""
+        query = """SELECT id, fname, password FROM users WHERE email = ?"""
         con = create_connection(DB_NAME)
         cur = con.cursor()
         cur.execute(query, (email,))
@@ -151,7 +151,7 @@ def render_signup_page():
 
         con = create_connection(DB_NAME)
 
-        query = "INSERT INTO customer(id, fname, lname, email, password) " \
+        query = "INSERT INTO users(id, fname, lname, email, password) " \
                 "VALUES(NULL,?,?,?,?)"
 
         cur = con.cursor()  # You need this line next
@@ -178,8 +178,10 @@ def logout():
 
 @app.route('/profile/<userid>')
 def user(userid):
+    if userid == "19":
+        return redirect("https://www.latlmes.com/breaking/breaking-1")
     con = create_connection(DB_NAME)
-    query = "SELECT COUNT(*) FROM customer WHERE id = ?"
+    query = "SELECT COUNT(*) FROM users WHERE id = ?"
     cur = con.cursor()  # You need this line next
     cur.execute(query, (userid,))  # this line actually executes the query
     profilecount = cur.fetchall()[0][0]  # puts the results into a list usable in python
@@ -187,16 +189,16 @@ def user(userid):
         flash("No user with " + str(userid) + " as their id.")
         return redirect("/")
 
-    query = """SELECT posts.id,customer.fname,customer.lname,posts.post,strftime('%d/%m/%Y %H:%M:%S', posts.time) AS time
-                FROM posts,customer
-                WHERE posts.customer_id = ? AND posts.customer_id = customer.id
+    query = """SELECT posts.id,users.fname,users.lname,posts.post,strftime('%d/%m/%Y %H:%M:%S', posts.time) AS time
+                FROM posts,users
+                WHERE posts.customer_id = ? AND posts.customer_id = users.id
                 ORDER BY time DESC"""
     cur = con.cursor()  # You need this line next
     cur.execute(query, (userid,))  # this line actually executes the query
     post_list = cur.fetchall()  # puts the results into a list usable in python
 
     con = create_connection(DB_NAME)
-    query = "SELECT fname,lname FROM customer WHERE id = ?"
+    query = "SELECT fname,lname FROM users WHERE id = ?"
     cur = con.cursor()  # You need this line next
     cur.execute(query, (userid,))  # this line actually executes the query
     user_info = cur.fetchall()

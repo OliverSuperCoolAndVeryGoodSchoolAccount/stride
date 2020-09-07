@@ -1,26 +1,25 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block pageheading %}welcome{% endblock %}
+{% block pageheading %}
+{{ userinfo[0][0] }} {{ userinfo[0][1] }}'s Profile
+{% endblock %}
 
 {% block body %}
             <div class = "mainPageParent">
                 <div class="left">
-                {% if logged_in %}
                     <form method="POST">
-                        <label for="message">What's on your mind, {{ session.firstname }}?</label><br><br>
-                        <textarea name="message" id="message" rows="10" cols="40"> </textarea><br>
-                        {{ recaptcha }}
-                        <input type="submit" value = "Send it in stride!">
+                        <label for="bio">Edit Biography:</label><br>
+                        <textarea name="bio" id="bio" rows="10" cols="40">{{ userinfo[0][2] }}</textarea><br>
+                        <label for="status">Edit relationship status:</label><br>
+                        <textarea name="status" id="status" rows="2" cols="40" maxlength="32">{{ userinfo[0][3] }}</textarea><br><br>
+                        <input type="submit" value="Update">
                     </form>
-                {% else %}
-                    <strong><em>Hello! Welcome to Stride!<br><br><br><br><br><br> Pay me @paypal >>> tohsgum@gmail.com </em></strong>
-                {% endif %}
-                 </div>
+                </div>
                 <div class="mainFeed">
                 {% for post in posts %}
                     <div class="mainFeed-box">
                         <div class="post-box-heading">
-                            <h3> <a href="/profile/{{ post[5] }}"> {{ post[1] }} {{ post[2] }}</h3></a></h3>
+                            <h3> {{ post[1] }} {{ post[2] }}</h3>
                         </div>
                         <div class="mainFeed-box-text">
                             <p>{{ post[3] }} </p>
@@ -34,9 +33,5 @@
             </div>
             <div style="clear: both;"></div>
 
-
-{% endblock %}
-
-{% block main %}
 
 {% endblock %}

@@ -10,7 +10,7 @@ body {
     color: rgba(255, 255, 255, 1);
 }
 
-header h2{
+header h2 {
     padding: 0.5rem;
 }
 
@@ -185,15 +185,15 @@ nav {
     padding-bottom: 0.7rem;
     color: rgba(69, 219, 52, 0.73); /*light blue*/
 }
-.mainPageParent{
+
+.mainPageParent {
     width: 100%;
 }
 
-.postInput{
+.left {
     width: 49%;
-    float:left;
+    float: left;
 }
-
 
 
 .navbar-brand {
@@ -234,8 +234,17 @@ h1 a {
 h1 a:hover {
     /*color: rgba(44, 62, 80, 1.0); !* darkest blue *!*/
     /*background-color: rgba(52, 152, 219, 1.0); !*light blue*!*/
-    border-bottom: 3px solid rgb(255,255,255);
+    border-bottom: 3px solid rgb(255, 255, 255);
 }
+
+textarea {
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
 .product-box img {
     /*max-width:200px;*/
 }
@@ -269,24 +278,28 @@ h1 a:hover {
     height: 150px;
     overflow: hidden;
 }
-.button-group a{
-    color:#ffffff;
+
+.button-group a {
+    color: #ffffff;
 }
 
 .button-group a:hover {
     /*color: rgba(44, 62, 80, 1.0); !* darkest blue *!*/
     /*background-color: rgba(52, 152, 219, 1.0); !*light blue*!*/
-    border-bottom: 3px solid rgb(255,255,255);
+    border-bottom: 3px solid rgb(255, 255, 255);
 }
+
 .mainFeed-box-info {
     padding: 0.5rem;
     float: right;
 
 }
+
 .mainFeed-box-text {
     padding: 0.3rem;
 
 }
+
 .mainFeed-box a {
     color: white;
 }
@@ -294,8 +307,9 @@ h1 a:hover {
 .mainFeed-box a:hover {
     /*color: rgba(44, 62, 80, 1.0); !* darkest blue *!*/
     /*background-color: rgba(52, 152, 219, 1.0); !*light blue*!*/
-    border-bottom: 3px solid rgb(255,255,255);
+    border-bottom: 3px solid rgb(255, 255, 255);
 }
+
 .mainFeed-box h3 {
     font-size: 1.2rem;
     text-align: center;
@@ -345,20 +359,19 @@ table {
     border-collapse: collapse;
 }
 
-.cart-table > thead {
-    font-weight: bold;
-}
-
-.cart-table td {
-    padding: 0.2rem 1rem;
+.headerButton a {
+    background-color: rgb(23, 99, 0); /* Green */
+    border: none;
+    border-radius: 1rem;
+    color: white;
+    margin-top: 1rem;
+    padding: 15px 32px;
     text-align: center;
-    border: 1px solid #ddd;
-}
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 
-.cart-total {
-    font-weight: bold;
 }
-
 
 @media only screen and (max-width: 600px) {
     .container {

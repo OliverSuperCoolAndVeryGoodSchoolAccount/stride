@@ -64,14 +64,14 @@ def render_homepage():
     query = """SELECT posts.id,users.fname,users.lname,posts.post,strftime('%d/%m/%Y %H:%M:%S', posts.time) AS time, users.id 
             FROM posts,users
             WHERE posts.customer_id = users.id
-            ORDER BY time DESC"""
-            #Add limit?
+            ORDER BY posts.time DESC"""
+    # Add limit?
 
     cur = con.cursor()  # You need this line next
     cur.execute(query)  # this line actually executes the query
     post_list = cur.fetchall()  # puts the results into a list usable in python
     con.close()
-    return render_template('home.html', logged_in=is_logged_in(), posts=post_list,)
+    return render_template('home.html', logged_in=is_logged_in(), posts=post_list, )
 
 
 @app.route('/profile')
@@ -176,10 +176,11 @@ def logout():
     flash("See you next time!")
     return redirect(request.referrer)
 
+
 @app.route('/profile/<userid>')
-def user(userid):
-    if userid == "19":
-        return redirect("https://www.latlmes.com/breaking/breaking-1")
+def profile(userid):
+    # if userid == "19":
+    #      return redirect("https://www.latlmes.com/breaking/breaking-1")
     con = create_connection(DB_NAME)
     query = "SELECT COUNT(*) FROM users WHERE id = ?"
     cur = con.cursor()  # You need this line next
@@ -192,20 +193,54 @@ def user(userid):
     query = """SELECT posts.id,users.fname,users.lname,posts.post,strftime('%d/%m/%Y %H:%M:%S', posts.time) AS time
                 FROM posts,users
                 WHERE posts.customer_id = ? AND posts.customer_id = users.id
-                ORDER BY time DESC"""
+                ORDER BY posts.time DESC"""
     cur = con.cursor()  # You need this line next
     cur.execute(query, (userid,))  # this line actually executes the query
     post_list = cur.fetchall()  # puts the results into a list usable in python
 
     con = create_connection(DB_NAME)
-    query = "SELECT fname,lname FROM users WHERE id = ?"
+    query = "SELECT fname,lname,biography,relationship,id FROM users WHERE id = ?"
     cur = con.cursor()  # You need this line next
     cur.execute(query, (userid,))  # this line actually executes the query
     user_info = cur.fetchall()
 
     con.close()
-    return render_template('profile.html', logged_in=is_logged_in(), posts=post_list, userinfo = user_info,)
+    correct_user = False
+    if str(session['userid']) == str(userid):
+        correct_user = True
 
+    return render_template('profile.html', logged_in=is_logged_in(), correctuser=correct_user, posts=post_list, userinfo=user_info, )
+
+@app.route('/profile/<userid>/edit', methods=["GET", "POST"])
+def editprofile(userid):
+    if str(session['userid']) == str(userid):
+        con = create_connection(DB_NAME)
+        if request.method == "POST":
+            biography = request.form['bio'].strip()
+            relationship = request.form['status'].strip()
+            query = "UPDATE users SET biography=?,relationship=? WHERE id=?"
+            cur = con.cursor()
+            cur.execute(query, (biography, relationship, userid))
+            con.commit()
+
+        query = """SELECT posts.id,users.fname,users.lname,posts.post,strftime('%d/%m/%Y %H:%M:%S', posts.time) AS time
+                                FROM posts,users
+                                WHERE posts.customer_id = ? AND posts.customer_id = users.id
+                                ORDER BY posts.time DESC"""
+        cur = con.cursor()
+        cur.execute(query, (userid,))  # this line actually executes the query
+        post_list = cur.fetchall()  # puts the results into a list usable in python
+
+        con = create_connection(DB_NAME)
+        query = "SELECT fname,lname,biography,relationship,id FROM users WHERE id = ?"
+        cur.execute(query, (userid,))  # this line actually executes the query
+        user_info = cur.fetchall()
+        con.close()
+
+        return render_template('editprofile.html', logged_in=is_logged_in(), posts=post_list, userinfo=user_info,)
+    else:
+        flash("You cannot edit a profile that is not yours.")
+        return redirect("/profile/" + str(userid))
 
 def is_logged_in():
     if session.get("email") is None:

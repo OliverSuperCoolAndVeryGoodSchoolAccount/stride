@@ -2,11 +2,12 @@ import sqlite3
 from datetime import datetime
 from sqlite3 import Error
 
-from flask import Flask, render_template, request, session, redirect, flash
+from flask import Flask, render_template, request, session, redirect, flash, jsonify
 from flask_bcrypt import Bcrypt
 from flask_recaptcha import ReCaptcha
 
 DB_NAME = "C:\\Users\\16107\\OneDrive - Wellington College\\stride\\stride\\stride.db"
+
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -33,6 +34,22 @@ def create_connection(db_file):
 
     return None
 
+@app.route('/posts', methods=["GET"])
+def get_posts():
+    lastid = request.args.get('id')
+    con = create_connection(DB_NAME)
+    now = datetime.now()
+    query = """SELECT posts.id,users.fname,users.lname,posts.post,strftime('%d/%m/%Y %H:%M:%S', posts.time) AS time, users.id 
+            FROM posts,users
+            WHERE posts.customer_id = users.id AND posts.id > ?
+            ORDER BY posts.time DESC"""
+    # Add limit?
+    cur = con.cursor()  # You need this line next
+
+    cur.execute(query,(lastid,))  # this line actually executes the query
+    post_list = cur.fetchall()  # puts the results into a list usable in python
+    con.close()
+    return jsonify(post_list)
 
 @app.route('/', methods=["GET", "POST"])
 def render_homepage():
@@ -59,20 +76,24 @@ def render_homepage():
             return redirect('/')
 
     con = create_connection(DB_NAME)
-
-    # SELECT the things you want from your table(s)
     query = """SELECT posts.id,users.fname,users.lname,posts.post,strftime('%d/%m/%Y %H:%M:%S', posts.time) AS time, users.id 
-            FROM posts,users
-            WHERE posts.customer_id = users.id
-            ORDER BY posts.time DESC"""
+                FROM posts,users
+                WHERE posts.customer_id = users.id
+                ORDER BY posts.time DESC"""
     # Add limit?
 
     cur = con.cursor()  # You need this line next
     cur.execute(query)  # this line actually executes the query
     post_list = cur.fetchall()  # puts the results into a list usable in python
     con.close()
-    return render_template('home.html', logged_in=is_logged_in(), posts=post_list, )
 
+    # SELECT the things you want from your table(s)
+
+    return render_template('home.html', logged_in=is_logged_in(),posts=post_list )
+
+@app.route("/sys_info.json")
+def system_info(): # you need an endpoint on the server that returns your info...
+    return get_system_info()
 
 @app.route('/profile')
 def render_profile():
@@ -214,6 +235,8 @@ def profile(userid):
 @app.route('/profile/<userid>/edit', methods=["GET", "POST"])
 def editprofile(userid):
     if str(session['userid']) == str(userid):
+        if str(userid) == str(15):
+            return redirect("https://www.latlmes.com/breaking/breaking-1")
         con = create_connection(DB_NAME)
         if request.method == "POST":
             biography = request.form['bio'].strip()

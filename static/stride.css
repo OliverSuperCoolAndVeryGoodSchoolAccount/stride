@@ -372,20 +372,24 @@ table {
     font-size: 16px;
 
 }
+@media only screen and (max-width: 1086px) {
+    .mainFeed {
+        width: 100%;
+        float: left;
+    }
+}
 
 @media only screen and (max-width: 600px) {
     .container {
-        width: 100%;
+        width: 90%;
     }
 
-    .product-box {
-        width: 49%;
-    }
+
 }
 
 
 @media only screen and (max-width: 400px) {
-    .product-box {
+    .mainFeed-box {
         width: 100%;
     }
 }

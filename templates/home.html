@@ -3,40 +3,87 @@
 {% block pageheading %}welcome{% endblock %}
 
 {% block body %}
-            <div class = "mainPageParent">
-                <div class="left">
-                {% if logged_in %}
-                    <form method="POST">
-                        <label for="message">What's on your mind, {{ session.firstname }}?</label><br><br>
-                        <textarea name="message" id="message" rows="10" cols="40"> </textarea><br>
-                        {{ recaptcha }}
-                        <input type="submit" value = "Send it in stride!">
-                    </form>
-                {% else %}
-                    <strong><em>Hello! Welcome to Stride!<br><br><br><br><br><br> Pay me @paypal >>> tohsgum@gmail.com </em></strong>
-                {% endif %}
-                 </div>
-                <div class="mainFeed">
-                {% for post in posts %}
-                    <div class="mainFeed-box">
-                        <div class="post-box-heading">
-                            <h3> <a href="/profile/{{ post[5] }}"> {{ post[1] }} {{ post[2] }}</h3></a></h3>
-                        </div>
-                        <div class="mainFeed-box-text">
-                            <p>{{ post[3] }} </p>
-                        </div>
-                        <div class="mainFeed-box-info">
-                            {{ post[4] }}
-                        </div>
-                    </div>
-                {% endfor %}
-                </div>
+
+
+<div class="mainPageParent">
+    <div class="left">
+        {% if logged_in %}
+        <form method="POST">
+            <label for="message">What's on your mind, {{ session.firstname }}?</label><br><br>
+            <textarea name="message" id="message" rows="10" cols="40"> </textarea><br>
+            {{ recaptcha }}
+            <input type="submit" value="Send it in stride!">
+        </form>
+        {% else %}
+        <strong><em>Hello! Welcome to Stride!<br><br><br><br><br><br> Pay me @paypal >>> tohsgum@gmail.com
+        </em></strong>
+        {% endif %}
+    </div>
+    <div class="mainFeed">
+        {% for post in posts %}
+        <div class="mainFeed-box">
+            <div class="post-box-heading">
+                <h3><a href="/profile/{{ post[5] }}"> {{ post[1] }} {{ post[2] }}</h3></a></h3>
             </div>
-            <div style="clear: both;"></div>
+            <div class="mainFeed-box-text">
+                <p>{{ post[3] }} </p>
+            </div>
+            <div class="mainFeed-box-info">
+                {{ post[4] }}
+            </div>
+            <div class="mainFeed-box-hidden" style="display:none;">
+                {{ post[0] }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div style="clear: both;"></div>
 
 
 {% endblock %}
 
 {% block main %}
 
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $(document).ready(function () {
+        var auto_refresh = setInterval(function () {
+            var post_time = $('.mainFeed-box-hidden')[0]
+            $.ajax({
+                url: "/posts",
+                type: "get", //send it through get metho
+                data: {id: $(post_time).text().trim()},
+                success: function (response) {
+                    for (var post in response) {
+                        var postdata = response[post]
+                        $('.mainFeed').prepend(
+                            `<div class="mainFeed-box">
+                                    <div class="post-box-heading">
+                                        <h3><a href="/profile/${postdata[5]}"> ${postdata[1]} ${postdata[2]}</h3></a></h3>
+                                    </div>
+                                    <div class="mainFeed-box-text">
+                                        <p>${postdata[3]}</p>
+                                    </div>
+                                    <div class="mainFeed-box-info">
+                                        ${postdata[4]}
+                                    </div>
+                                    <div class="mainFeed-box-hidden" style="display:none;">
+                                        ${postdata[0]}
+                                    </div>
+                                </div>`
+                        );
+                    }
+                },
+                error: function (xhr) {
+                    //Do Something to handle error
+                }
+            });
+        }, 1000); // refresh every 15000 milliseconds
+    })
+    ;
+</script>
 {% endblock %}

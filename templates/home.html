@@ -13,7 +13,7 @@
                     <textarea name="message" id="message" rows="10" cols="40" required> </textarea><br>
                     <input type="file" name="file" id="file"><br>
                     {{ recaptcha }}
-                    <input type="submit" value="Send it in stride!">
+                    <input type="submit" class="submitBtn" value="Send it in stride!">
                 </form>
             {% else %}
                 <strong><em>Hello! Welcome to Stride!<br><br><br><br><br><br> Pay me @paypal >>> tohsgum@gmail.com
@@ -54,7 +54,14 @@
 {% endblock %}
 
 {% block scripts %}
-
+    <script>
+    $(document).ready(function () {
+        $(".submitBtn").click(function () {
+            $(".submitBtn").attr("disabled", true);
+            return true;
+        });
+    });
+    </script>
     <script>
         $(document).ready(function () {
             var auto_refresh = setInterval(function () {

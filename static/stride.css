@@ -274,6 +274,10 @@ textarea {
     padding: 0.5rem;
 }
 
+.mainFeed-box-image > img {
+    width: 100%;
+}
+
 .product-box-image {
     height: 150px;
     overflow: hidden;
@@ -372,6 +376,7 @@ table {
     font-size: 16px;
 
 }
+
 @media only screen and (max-width: 1086px) {
     .mainFeed {
         width: 100%;

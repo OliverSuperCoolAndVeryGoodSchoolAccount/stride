@@ -1,2 +1,2 @@
 # stride
-my epic and cool social media
+my epic and cool social media!

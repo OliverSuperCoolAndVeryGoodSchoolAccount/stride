@@ -248,7 +248,7 @@ def logout():
     [session.pop(key) for key in list(session.keys())]
     print(list(session.keys()))
     flash("See you next time!")
-    return redirect(request.referrer)
+    return redirect('/')
 
 
 @app.route('/profile/<userid>')

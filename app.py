@@ -72,64 +72,66 @@ def render_homepage():
     if not is_logged_in():
         return redirect('/login')
     if request.method == "POST":
-        if recaptcha.verify():
-            userid = session['userid']
-            post = request.form['message'].strip()
-
-            time = datetime.now()
-            filename = ""
-
-            # this seems to be always true
-            if 'file' in request.files:
-                file = request.files['file']
-                print(file.filename)
-                if file.filename == '':
-                    # there is no file, check if it is a text stride
-                    if not 1 <= len(post) <= 280:
-                        flash("Your Stride must be no more than 280 characters!")
-                        return redirect('/')
-                elif allowed_file(file.filename):
-                    filename = secure_filename(str(userid) + "_" + str(time) + "_" + file.filename)
-                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
-                    # use Pillow to resize
-                    image = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                    width, height = image.size[0], image.size[1]
-                    print(width, height)
-                    MAX_WIDTH, MAX_HEIGHT = 640, 480
-                    if width > MAX_WIDTH or height > MAX_HEIGHT:
-                        x_factor = ceil(width / MAX_WIDTH)
-                        y_factor = ceil(height / MAX_HEIGHT)
-                        if x_factor > y_factor:
-                            x, y = int(ceil(width / x_factor)), int(ceil(height / x_factor))
-
-                        else:
-                            x, y = int(ceil(width / y_factor)), int(ceil(height / y_factor))
-                        image = image.resize((x, y))
-                        image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                        print(image.size)
-                else:
-                    flash('This file type is not allowed')
-                    return redirect('/')
-
-            query = "INSERT INTO posts(id,post,time,customer_id,imagename) VALUES (NULL,?,?,?,?)"
-            con = create_connection(DB_NAME)
-            cur = con.cursor()
-            cur.execute(query, (post, time, userid, filename))
-            con.commit()
-            con.close()
-            return redirect('/')
-            pass
-        else:
+        if not recaptcha.verify():
             flash("Captcha failed, please try again.")
             return redirect('/')
+
+        userid = session['userid']
+        post = request.form['message'].strip()
+
+        time = datetime.now()  # for file name and post time
+        filename = ""
+
+        # this seems to be always true
+        if 'file' in request.files:
+            file = request.files['file']
+
+            if file.filename == '':
+                # there is no file, check if it is a text stride
+                if not 1 <= len(post) <= 280:
+                    flash("Your Stride must be no more than 280 characters!")
+                    return redirect('/')
+
+            elif allowed_file(file.filename):
+                # ensure the image name is unique so we don't overwrite
+                filename = secure_filename(str(userid) + "_" + str(time) + "_" + file.filename)
+                # save the image to specified directory
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+                # use Pillow to resize
+                # scale to be no larger than 640px wide and 480px high
+                image = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                width, height = image.size[0], image.size[1]
+                print(width, height)
+                MAX_WIDTH, MAX_HEIGHT = 640, 480
+                if width > MAX_WIDTH or height > MAX_HEIGHT:
+                    x_factor = ceil(width / MAX_WIDTH)
+                    y_factor = ceil(height / MAX_HEIGHT)
+                    if x_factor > y_factor:
+                        x, y = int(ceil(width / x_factor)), int(ceil(height / x_factor))
+                    else:
+                        x, y = int(ceil(width / y_factor)), int(ceil(height / y_factor))
+                    image = image.resize((x, y))
+                    image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            else:
+                flash('This file type is not allowed')
+                return redirect('/')
+
+        query = "INSERT INTO posts(id,post,time,customer_id,imagename) VALUES (NULL,?,?,?,?)"
+        con = create_connection(DB_NAME)
+        cur = con.cursor()
+        cur.execute(query, (post, time, userid, filename))
+        con.commit()
+        con.close()
+        return redirect('/')
 
     con = create_connection(DB_NAME)
     query = """SELECT posts.id,users.fname,users.lname,posts.post,strftime('%d/%m/%Y %H:%M:%S', posts.time) AS time, users.id,posts.imagename 
                 FROM posts,users
                 WHERE posts.customer_id = users.id
-                ORDER BY posts.time DESC"""
-    # Add limit?
+                ORDER BY posts.time DESC
+                LIMIT 20"""
 
     cur = con.cursor()  # You need this line next
     cur.execute(query)  # this line actually executes the query
